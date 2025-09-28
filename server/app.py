@@ -11,8 +11,11 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # ✅ Enable CORS for all routes from your frontend
-    CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:5173"}}, supports_credentials=True)
+    # ✅ Enable CORS for local and Vercel frontend
+    CORS(app, origins=[
+        "http://127.0.0.1:5173",
+        "https://knowbase-frontend-i7farrbjb-james-ivans-projects-7c9e8b6a.vercel.app"
+    ])
 
     api = Api(app)
 
